@@ -84,6 +84,16 @@ body::after {
 .btn-cv svg { width: 1rem; height: 1rem; }
 .btn-cv:hover { border-color: var(--white); background: rgba(255, 255, 255, .06); box-shadow: var(--glow); }
 
+.lang-switch { display: inline-flex; border: 1px solid var(--line-strong); border-radius: 999px; overflow: hidden; }
+.lang-switch button {
+  padding: .55rem .8rem; background: none; border: 0; cursor: pointer;
+  font-family: "JetBrains Mono", monospace; font-size: .78rem; font-weight: 700; color: var(--silver);
+  transition: color .25s, background .25s;
+}
+.lang-switch button:hover { color: var(--white); }
+.lang-switch button:focus-visible { outline: 2px solid var(--white); outline-offset: -2px; }
+.lang-switch button[aria-pressed="true"] { background: var(--white); color: #0a0a0c; }
+
 /* Sections */
 .section { margin-bottom: 6rem; scroll-margin-top: 6rem; }
 @media (min-width: 1024px) { .section { margin-bottom: 9rem; scroll-margin-top: 6rem; } }
