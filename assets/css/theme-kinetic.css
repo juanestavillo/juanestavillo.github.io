@@ -1,0 +1,122 @@
+/* Variant A: kinetic type (hero) + blueprint (architecture) + particles (background).
+   Loaded before styles.css, so overrides of shared hooks are scoped with [data-variant="a"]. */
+:root {
+  --bp-paper: #0f2f63;
+  --bp-ink: #e8f1ff;
+  --bp-dim: #a9c3ec;
+  --bp-grid: rgb(232 241 255 / 0.07);
+  --bp-grid-major: rgb(232 241 255 / 0.14);
+  --bp-accent: #ffd166;
+  --k-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --draw-ease: cubic-bezier(0.45, 0, 0.55, 1);
+}
+
+/* ---------- 1. Kinetic type: hero name ---------- */
+/* Avoid a flash of the unsplit name; a failsafe reveals it if the script never runs. */
+@media (prefers-reduced-motion: no-preference) {
+  .js[data-variant="a"] header h1:not(.k-split) { visibility: hidden; animation: k-failsafe 0s 1.5s forwards; }
+}
+@keyframes k-failsafe { to { visibility: visible; } }
+
+.k-line {
+  display: block; overflow: clip;
+  /* Room for ascenders and the J below the mask edge. */
+  padding-block: 0.06em 0.12em; margin-block: -0.06em -0.12em;
+}
+.k-word {
+  display: inline-block; transform: translateY(110%);
+  transition: transform 0.95s var(--k-ease);
+  transition-delay: calc(120ms + var(--i, 0) * 130ms);
+}
+.k-split.is-in .k-word { transform: none; }
+.k-char {
+  display: inline-block;
+  transform: translateY(calc(var(--lift, 0) * -0.09em)) scaleY(calc(1 + var(--lift, 0) * 0.05));
+  transform-origin: 50% 100%;
+  text-shadow: 0 0 calc(var(--lift, 0) * 18px) rgb(255 255 255 / 0.45);
+  transition: transform 0.45s var(--k-ease), text-shadow 0.45s;
+}
+
+/* Stack marquee under the role line. */
+[data-variant="a"] .stack-marquee {
+  display: block; position: relative; margin-top: 1.25rem; max-width: 100%; overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+.stack-track {
+  display: flex; width: max-content;
+  font-size: 1.35rem; font-weight: 800; letter-spacing: 0.01em; line-height: 1.4; text-transform: uppercase;
+  animation: k-marquee 42s linear infinite;
+}
+.stack-track span { display: inline-flex; align-items: center; white-space: nowrap; }
+.stack-track span::after {
+  content: "/"; padding-inline: 0.9rem;
+  font-family: "JetBrains Mono", monospace; font-size: 0.85rem; font-weight: 400; color: var(--silver);
+  -webkit-text-stroke: 0;
+}
+.stack-track span:nth-child(odd) { color: #fff; }
+.stack-track span:nth-child(even) { color: transparent; -webkit-text-stroke: 1px #d4d4d8; }
+.stack-marquee:hover .stack-track { animation-play-state: paused; }
+@keyframes k-marquee { to { transform: translateX(-50%); } }
+
+/* ---------- 2. Blueprint: PTDE architecture ---------- */
+[data-variant="a"] .arch-blueprint {
+  container-type: inline-size; position: relative; margin: 0 0 2.5rem;
+}
+.bp-sheet {
+  position: relative; padding: 0.9rem; border: 1px solid rgb(232 241 255 / 0.28);
+  background-color: var(--bp-paper);
+  background-image:
+    linear-gradient(var(--bp-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bp-grid) 1px, transparent 1px),
+    linear-gradient(var(--bp-grid-major) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bp-grid-major) 1px, transparent 1px);
+  background-size: 16px 16px, 16px 16px, 80px 80px, 80px 80px;
+  background-position: -1px -1px;
+}
+/* Corner tick marks instead of a heavy frame. */
+.bp-sheet::before, .bp-sheet::after {
+  content: ""; position: absolute; width: 14px; height: 14px; pointer-events: none;
+  border-color: var(--bp-ink); border-style: solid;
+}
+.bp-sheet::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+.bp-sheet::after { right: -1px; bottom: -1px; border-width: 0 2px 2px 0; }
+
+.bp-sheet svg { display: block; width: 100%; height: auto; overflow: visible; }
+.bp-tall { display: none !important; }
+@container (max-width: 479px) {
+  .bp-wide { display: none !important; }
+  .bp-tall { display: block !important; }
+}
+
+.bp-ln { fill: none; stroke: var(--bp-ink); stroke-width: 1; stroke-linecap: square; vector-effect: non-scaling-stroke; }
+.bp-ln.is-bold { stroke-width: 2; }
+.bp-ln.is-accent { stroke: var(--bp-accent); stroke-width: 2; }
+.bp-ln.is-faint { stroke: var(--bp-dim); opacity: 0.6; }
+.bp-dash { fill: none; stroke: var(--bp-dim); stroke-width: 1; stroke-dasharray: 4 3; vector-effect: non-scaling-stroke; }
+.bp-tx { fill: var(--bp-ink); font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.06em; }
+.bp-tx.is-dim { fill: var(--bp-dim); }
+.bp-tx.is-name { font-family: "Inter Tight", system-ui, sans-serif; font-size: 13px; font-weight: 700; letter-spacing: -0.01em; }
+.bp-tx.is-accent { fill: var(--bp-accent); }
+
+/* Draw-on: every .bp-ln has pathLength="1". */
+.bp-ln { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.1s var(--draw-ease) calc(var(--i, 0) * 32ms); }
+.bp-dash, .bp-tx { opacity: 0; transition: opacity 0.6s var(--draw-ease) calc(300ms + var(--i, 0) * 32ms); }
+.is-drawn .bp-ln { stroke-dashoffset: 0; }
+.is-drawn .bp-dash, .is-drawn .bp-tx { opacity: 1; }
+
+.bp-caption {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.25rem 1rem; margin-top: 0.6rem;
+  font-family: "JetBrains Mono", monospace; font-size: 0.72rem; letter-spacing: 0.08em; color: var(--silver);
+}
+.bp-caption b { color: #fff; font-weight: 700; }
+
+/* ---------- Reduced motion: final states, no loops, no delays ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .k-word, .k-char { transform: none !important; transition: none !important; }
+  .k-char { text-shadow: none; }
+  .stack-track { animation: none !important; }
+  .bp-ln, .bp-dash, .bp-tx { transition: none !important; }
+  .bp-ln { stroke-dashoffset: 0; }
+  .bp-dash, .bp-tx { opacity: 1; }
+}

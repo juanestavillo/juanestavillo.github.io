@@ -208,3 +208,6 @@ body::after {
   *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; }
   .js [data-reveal] { opacity: 1; transform: none; }
 }
+
+/* Hooks the kinetic theme fills in; hidden unless it turns them on. */
+.stack-marquee, .arch-blueprint:empty { display: none; }
