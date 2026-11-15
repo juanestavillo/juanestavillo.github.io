@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-variant="a">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -11,6 +11,7 @@
   <meta property="og:type" content="website" />
   <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
   <script>document.documentElement.classList.add("js");</script>
+  <link rel="stylesheet" href="./assets/css/theme-kinetic.css" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -51,6 +52,9 @@
             Full-Stack Developer <span class="text-silver font-medium">(Java &amp; Angular)</span>
             <span class="block font-mono text-sm font-medium text-silver mt-1">Data &amp; SW Architecture</span>
           </h2>
+          <div class="stack-marquee" aria-hidden="true">
+            <div class="stack-track"><span>Java</span><span>Spring Boot</span><span>Angular 22</span><span>PostgreSQL</span><span>Docker</span><span>TypeScript</span><span>Flyway</span><span>Claude Code</span></div>
+          </div>
           <p class="mt-5 max-w-sm leading-relaxed" data-i18n="tagline">
             Construyendo software escalable desde el backend en Java hasta interfaces reactivas en Angular 22 y análisis de datos.
           </p>
@@ -220,6 +224,8 @@
             Conocimientos organizados en cinco pilares: del dato persistido a la decisión de negocio.
           </p>
 
+          <figure class="arch-blueprint" data-blueprint></figure>
+
           <div class="grid gap-4 sm:grid-cols-2">
             <article class="pillar" data-reveal>
               <span class="pillar-index">01</span>
@@ -295,7 +301,7 @@
     </div>
   </div>
 
-  <script src="./assets/js/lightning.js" defer></script>
+  <script src="./assets/js/theme-kinetic.js" defer></script>
   <script src="./assets/js/i18n.js" defer></script>
   <script src="./assets/js/main.js" defer></script>
 </body>
