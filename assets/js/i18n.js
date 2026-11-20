@@ -23,6 +23,9 @@
     foodiesSub: "Complete Reservation System &amp; Restaurant Dashboard",
     repoBack: "Backend repo (Spring Boot)",
     repoFront: "Frontend repo (Angular 22)",
+    demoWatch: "Watch demo (38 s)",
+    demoFoodiesTitle: "Foodies in 38 seconds",
+    demoFoodiesCaption: "Filtering by cuisine, a client booking a table and the restaurant accepting it from its dashboard. Test data only.",
     foodies1: `${strong("Layered RESTful architecture")} with Spring Boot 3 and MySQL.`,
     foodies2: `${strong("Role-based JWT authentication")} (customer, restaurant, admin) with Spring Security.`,
     foodies3: `${strong("Signals in Angular 22")} and Standalone Components for reactive, predictable state.`,
@@ -65,6 +68,7 @@
   };
 
   const ARIA_EN = {
+    "Cerrar demo": "Close demo",
     "Conocimientos y arquitectura de software": "Skills and software architecture",
     "Contacto": "Contact",
     "Enviar email": "Send email",

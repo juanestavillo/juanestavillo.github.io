@@ -62,6 +62,25 @@
     }, { passive: true });
   }
 
+  // Demo videos open in a native modal dialog; the video pauses when it closes.
+  document.querySelectorAll("[data-demo-open]").forEach((button) => {
+    const dialog = document.getElementById(button.dataset.demoOpen);
+    if (!dialog || typeof dialog.showModal !== "function") return;
+    const video = dialog.querySelector("video");
+    button.addEventListener("click", () => {
+      dialog.showModal();
+      if (video) video.play().catch(() => { /* The viewer can press play. */ });
+    });
+    const closeDemo = () => {
+      if (video) video.pause();
+      dialog.close();
+    };
+    dialog.querySelector("[data-demo-close]")?.addEventListener("click", closeDemo);
+    dialog.addEventListener("click", (event) => { if (event.target === dialog) closeDemo(); });
+    // Esc closes the dialog natively; pause there too.
+    dialog.addEventListener("close", () => { if (video) video.pause(); });
+  });
+
   const year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();
 })();
