@@ -147,6 +147,10 @@
                 <span data-i18n="repoFront">Repo Frontend (Angular 22)</span>
                 <span class="arrow" aria-hidden="true">↗</span>
               </a>
+              <button type="button" class="repo-badge demo-badge" data-demo-open="foodies-demo" aria-haspopup="dialog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg>
+                <span data-i18n="demoWatch">Ver demo (38 s)</span>
+              </button>
             </div>
 
             <ul class="feature-list mt-6">
@@ -302,6 +306,17 @@
       </main>
     </div>
   </div>
+
+  <dialog id="foodies-demo" class="demo-dialog" aria-labelledby="foodies-demo-title">
+    <div class="demo-head">
+      <h5 id="foodies-demo-title" class="demo-title" data-i18n="demoFoodiesTitle">Foodies en 38 segundos</h5>
+      <button type="button" class="demo-close" data-demo-close aria-label="Cerrar demo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+    <video class="demo-video" src="./assets/demos/foodies-demo.webm" poster="./assets/demos/foodies-poster.png" controls muted playsinline preload="none" width="1280" height="720"></video>
+    <p class="demo-caption" data-i18n="demoFoodiesCaption">Búsqueda por especialidad, reserva de una clienta y aceptación desde el panel del restaurante. Usa datos de prueba.</p>
+  </dialog>
 
   <script src="./assets/js/theme-kinetic.js" defer></script>
   <script src="./assets/js/i18n.js" defer></script>
